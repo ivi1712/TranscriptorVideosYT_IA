@@ -282,33 +282,3 @@ En la primera versión, los lanzadores de Windows tenían saltos de línea incom
 ### Alcance actual
 
 Esta versión está diseñada para **un vídeo cada vez** y para generar archivos de texto de apoyo. **No incluye** interfaz web, base de datos, resumen automático, traducción, procesamiento de listas de reproducción ni separación de hablantes. Si algún día se añaden, serán mejoras futuras, no funciones disponibles ahora.
-
-## Subir el proyecto a GitHub
-
-Copia este `README.md` en la misma carpeta que `transcribir.py`. Antes de publicar, comprueba que el archivo `.gitignore` incluya al menos:
-
-```gitignore
-.env
-.venv/
-__pycache__/
-transcripciones/
-```
-
-Puedes crear un repositorio vacío en GitHub y subir los archivos desde su interfaz. Si prefieres Git, sitúate en la carpeta del proyecto y ejecuta:
-
-```powershell
-git init
-git add .
-git commit -m "Primera versión del transcriptor de YouTube"
-git branch -M main
-git remote add origin URL_DE_TU_REPOSITORIO
-git push -u origin main
-```
-
-Sustituye `URL_DE_TU_REPOSITORIO` por la URL real que te proporcione GitHub. **Comprueba con `git status` qué archivos vas a publicar y no subas `.env`.**
-
-## Estado del proyecto
-
-Primera versión para uso personal. El código y la sintaxis de Python pueden revisarse localmente, pero el funcionamiento completo depende de YouTube, Groq, la conexión a Internet y los permisos de acceso a cada vídeo. No se garantiza compatibilidad indefinida con servicios de terceros.
-
-No se incluye una licencia de distribución en esta versión. Si el repositorio se va a publicar como proyecto de código abierto, conviene decidir e incorporar una licencia expresamente.
