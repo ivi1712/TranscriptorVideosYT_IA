@@ -1,0 +1,65 @@
+TRANSCRIPTOR DE YOUTUBE PARA APUNTES (WINDOWS 11)
+================================================
+
+¿QUE HACE?
+- Pegas un enlace de YouTube.
+- Intenta leer subtitulos en espanol o ingles con youtube-transcript-api.
+- Si no puede leerlos, te pide permiso para obtener el audio y transcribirlo con Whisper Turbo en Groq.
+- Guarda DOS TXT: uno limpio para copiar a tus apuntes y otro con marcas de tiempo y enlaces al video.
+- No necesita una GPU potente. Borra el audio temporal al terminar.
+
+PRIMERA INSTALACION (una sola vez)
+1. Instala Python 3.13 en Windows desde https://www.python.org/downloads/
+   Alternativa: PowerShell -> winget install -e --id Python.Python.3.13
+   Si Windows lo pide, cierra y abre la terminal. Comprueba: py --version
+2. Descomprime este ZIP en una carpeta de tu ordenador.
+3. Instala FFmpeg abriendo PowerShell y ejecutando:
+      winget install -e --id Gyan.FFmpeg
+   Cierra y vuelve a abrir PowerShell; comprueba: ffmpeg -version
+   (FFmpeg solo es imprescindible cuando hay que procesar audio con Groq.)
+4. Ejecuta con doble clic "1_INSTALAR.bat". Debe crear .venv y .env.
+5. En https://console.groq.com/keys, crea una API key para Groq.
+   Abre con Bloc de notas el archivo .env (activa "Elementos ocultos" si no aparece),
+   y cambia PEGA_AQUI_TU_CLAVE por tu clave real. Guarda el archivo.
+   NUNCA compartas ese archivo ni subas tu clave a GitHub.
+   (Si solo usas subtitulos accesibles de YouTube, puedes omitir la clave.)
+
+PARA TRANSCRIBIR
+- Haz doble clic en "2_TRANSCRIBIR.bat".
+- Pega un enlace de un video de YouTube (no una lista de reproduccion).
+- Si los subtitulos son accesibles, se usa esa via sin subir audio a Groq.
+- Si no, te pregunta si autorizas usar el audio y enviarlo a Groq.
+- Busca los dos TXT en la carpeta "transcripciones" (texto limpio y version con tiempos).
+
+LIMITES Y OBSERVACIONES
+- Whisper mantiene el idioma original: transcribir ingles NO lo convierte a espanol.
+- El programa prioriza subtitulos en espanol y luego ingles.
+- Los subtitulos automaticos y Whisper pueden cometer errores en nombres o terminos tecnicos.
+- No todos los videos permiten obtener subtitulos ni audio (bloqueos, restricciones, autenticacion).
+- El nivel gratuito de Groq tiene cuotas y permite adjuntos de hasta 25 MB por solicitud.
+  Para no superar el limite, el programa convierte el audio en fragmentos comprimidos.
+- Groq recibe el audio que se necesite transcribir. No uses contenidos privados sin autorizacion.
+- Respeta derechos de autor y las condiciones de YouTube. La posibilidad tecnica de descargar
+  un video no equivale a disponer de permiso para hacerlo.
+- El programa no incluye un reproductor ni una interfaz web: esta pensado para generar apuntes.
+
+SOLUCION DE PROBLEMAS
+- Si falla "py": instala Python y habilita el Python Launcher (o reinstala Python).
+- Si falla "ffmpeg" o "ffprobe": instala FFmpeg y vuelve a abrir la terminal.
+- Si sale "Falta la clave": revisa GROQ_API_KEY en .env.
+- Si aparece error 429: has alcanzado una cuota de Groq; espera o revisa los limites de tu cuenta.
+- Si falla descargar audio, actualiza yt-dlp:
+      .venv\Scripts\python.exe -m pip install --upgrade yt-dlp
+- Si falla obtener subtitulos, la app puede ofrecerte Groq, pero no siempre puede obtener el audio.
+
+ENLACES TECNICOS
+https://github.com/jdepoix/youtube-transcript-api
+https://github.com/yt-dlp/yt-dlp
+https://console.groq.com/docs/speech-to-text
+
+
+NOTA VERSION CORREGIDA (noviembre de 2026)
+Los archivos .bat ahora usan saltos de linea de Windows (CRLF).
+Si descargaste una version anterior y viste errores como "cho" o "y"
+no reconocidos, sustituye 1_INSTALAR.bat y 2_TRANSCRIBIR.bat
+por los archivos de esta version. No borres tu archivo .env.
